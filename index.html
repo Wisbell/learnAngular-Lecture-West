@@ -6,20 +6,15 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body ng-app="myAppName">
-    <h1>Yo its angular</h1>
+    <h1>This h1 is always here</h1>
 
-    <div ng-controller="myMainController">
-        <p>Stuff Goes here</p>
+    <div ng-view></div>
 
-        <ul>
-            <li>My Stuff</li>
-            <li>{{potatoes}}</li>
-        </ul>
 
-        <input ng-model="potatoes" type="text" name="potatoes">
-    </div>
+    <h2>This h2 will always be here, too</h2>
 
     <script src="/bower_components/angular/angular.js" type="text/javascript"></script>
+    <script src="/bower_components/angular-route/angular-route.js" type="text/javascript"></script>
     <script src="app.js" type="text/javascript"></script>
 </body>
 </html>
