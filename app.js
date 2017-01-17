@@ -1,8 +1,26 @@
 console.log("app.js loaded")
 
 // angular.module(app name, dependencies)
-var app = angular.module('myAppName', [])
+var app = angular.module('myAppName', ['ngRoute'])
 
+
+app.config(function($routeProvider){
+    $routeProvider
+    .when('/', {
+        controller: 'MyMainController',
+        templateUrl: 'partials/main.html'
+    })
+    .when('/list', {
+        controller: 'ListCtrl',
+        templateUrl: 'partials/list.html'
+    })
+})
+
+
+
+
+
+// CONTROLLERS
 
 // name of controller convention
 
@@ -11,7 +29,7 @@ var app = angular.module('myAppName', [])
         // MyMainCtrl
 
 // app.controller(name of controller, function)
-app.controller('myMainController', function($scope){
+app.controller('MyMainController', function($scope){
     $scope.potatoes = "mashed"
     $scope.steak = "yummy?"
     $scope.number = 8;
@@ -25,6 +43,22 @@ app.controller('myMainController', function($scope){
     function doSomething(){
         console.log("doSomething function called")
     }
+})
 
+// list page controller
+app.controller('ListCtrl', function($scope, $http){
+    console.log("MyListController horray")
 
+    $http.get('list.json')
+        //resolve
+        .then(function(val){
+            console.log("val", val)
+            console.log("list.json", val.data)
+            $scope.list = val.data.list
+            //$scope.list.push("another thing!")
+        },
+        //reject  like .catch()   ??
+        function(){
+            console.log("rejected!!")
+        })
 })
