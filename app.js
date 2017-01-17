@@ -4,7 +4,8 @@ console.log("app.js loaded")
 const app = angular.module('myAppName', ['ngRoute'])
 
 
-app.config(function($routeProvider){
+app.config(function($routeProvider, $locationProvider){
+    $locationProvider.hashPrefix('');
     $routeProvider
     .when('/', {
         controller: 'MyMainController',
@@ -13,6 +14,13 @@ app.config(function($routeProvider){
     .when('/list', {
         controller: 'ListCtrl',
         templateUrl: 'partials/list.html'
+    })
+    .when('/list/:someVariable', {
+        controller: 'DetailCtrl',
+        templateUrl: 'partials/detail.html'
+    })
+    .otherwise({
+        redirectTo: '/'
     })
 })
 
@@ -59,10 +67,30 @@ app.controller('ListCtrl', function($scope, $http){
             console.log("val", val)
             console.log("list.json", val.data)
             $scope.list = val.data.list
-            $scope.list.push("another thing!") // if statement in liste partial will not show now
+            // $scope.list.push("another thing!") // if statement in liste partial will not show now
         },
         //reject  like .catch()   ??
         function(){
             console.log("rejected!!")
         })
+})
+
+// Detailed list controller
+app.controller('DetailCtrl', function($scope, $routeParams, $http){
+    console.log('detail controller')
+
+    $scope.thingFromUrl = $routeParams.someVariable
+
+    // get JSON
+        // returns a promise
+    $http.get(`list.json`)
+        .then(function(val){
+            console.log(val)
+
+            // dont need scope on list variable because it is nto used in html
+            let list = val.data.list
+            console.log(list)
+            $scope.selectedItem = list[$scope.thingFromUrl]
+        })
+
 })

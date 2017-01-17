@@ -17,7 +17,8 @@
 <!-- Searching using ng-model and ng-repeat with filter -->
 <input type="text" ng-model="searchList" name="">
 <ul>
-    <li ng-repeat="listItem in list | filter: searchList" ng-class-odd="'odd-number'">item: {{listItem}}</li>
+    <li ng-repeat="listItem in list | filter: searchList" ng-class-odd="'odd-number'">
+    <a href="#/list/{{listItem.id}}">item: {{listItem.item}}</a></li>
 </ul>
 
 <h3>{{potatoes}}</h3>
