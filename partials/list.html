@@ -1,0 +1,24 @@
+<h1>List Partial</h1>
+
+<h3>List</h3>
+
+<h5 ng-if="list.length === 3">My list has 3 Items!</h5>
+<!-- <ul ng-repeat="listItem in list" >
+    <li ng-class-odd="odd">{{listItem}}</li>
+</ul> -->
+
+<!-- <ul>
+    <li ng-repeat="listItem in list">
+      <span ng-class-odd="'odd-number'">{{listItem}}</span>
+    </li>
+</ul> -->
+
+
+<!-- Searching using ng-model and ng-repeat with filter -->
+<input type="text" ng-model="searchList" name="">
+<ul>
+    <li ng-repeat="listItem in list | filter: searchList" ng-class-odd="'odd-number'">item: {{listItem}}</li>
+</ul>
+
+<h3>{{potatoes}}</h3>
+<span>does this potatoes show up?</span>
