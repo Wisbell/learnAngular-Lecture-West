@@ -1,7 +1,7 @@
 console.log("app.js loaded")
 
 // angular.module(app name, dependencies)
-var app = angular.module('myAppName', ['ngRoute'])
+const app = angular.module('myAppName', ['ngRoute'])
 
 
 app.config(function($routeProvider){
@@ -55,7 +55,7 @@ app.controller('ListCtrl', function($scope, $http){
             console.log("val", val)
             console.log("list.json", val.data)
             $scope.list = val.data.list
-            //$scope.list.push("another thing!")
+            $scope.list.push("another thing!") // if statement in liste partial will not show now
         },
         //reject  like .catch()   ??
         function(){
