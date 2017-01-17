@@ -35,8 +35,8 @@ app.controller('MyMainController', function($scope){
     $scope.number = 8;
     $scope.bool = true;
     $scope.obj = {1: "thing"}
-    $scope.functionHere = function(){
-        console.log("function here called")
+    $scope.functionHere = function(arg){
+        console.log("function here called with arg", arg)
     }
 
     var something = "won't show up on the html with {{}}"
@@ -48,6 +48,10 @@ app.controller('MyMainController', function($scope){
 // list page controller
 app.controller('ListCtrl', function($scope, $http){
     console.log("MyListController horray")
+
+    $scope.clickFunction = function(){
+        console.log("click function button clicked?")
+    }
 
     $http.get('list.json')
         //resolve
