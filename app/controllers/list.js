@@ -1,21 +1,18 @@
 // list page controller
-app.controller('ListCtrl', function($scope, $http){
+app.controller('ListCtrl', function($scope, $http, simpleFactory, listFactory){
     console.log("MyListController horray")
+
+    $scope.factoryReturnThing = simpleFactory.getThatVar()
 
     $scope.clickFunction = function(){
         console.log("click function button clicked?")
     }
 
-    $http.get('list.json')
-        //resolve
-        .then(function(val){
-            console.log("val", val)
-            console.log("list.json", val.data)
-            $scope.list = val.data.list
-            // $scope.list.push("another thing!") // if statement in liste partial will not show now
-        },
-        //reject  like .catch()   ??
-        function(){
-            console.log("rejected!!")
-        })
+   listFactory.getList()
+    .then((val) => {
+        console.log("val from listCtrl", val)
+        $scope.list = val
+    })
+   // console.log("list fact return", listFactory.getList())
+   // $scope.list = listFactory.getList()
 })
